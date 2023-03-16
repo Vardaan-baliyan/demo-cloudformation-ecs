@@ -1,0 +1,18 @@
+[
+    {
+      "ParameterKey": "AWSAccountId",
+      "ParameterValue": "975757560751"
+    },
+    {
+      "ParameterKey": "AWSECRAdminUser",
+      "ParameterValue": "vardaan"
+    },
+    {
+      "ParameterKey": "PrefixName",
+      "ParameterValue": "vardaan"
+    },
+    {
+      "ParameterKey": "AWSECRRepoName",
+      "ParameterValue": "Vardaan-repo-demo"
+    }
+  ]

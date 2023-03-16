@@ -1,0 +1,19 @@
+[
+  {
+    "ParameterKey": "AWSAccountId",
+    "ParameterValue": "975757560751"
+  },  
+  {
+      "ParameterKey": "PrefixName",
+      "ParameterValue": "vardaan"
+    },
+    {
+      "ParameterKey": "SecurityGroup",
+      "ParameterValue": "sg-04842bf54ccd90404"
+    },
+    {
+      "ParameterKey": "SubnetID",
+      "ParameterValue": "subnet-00c9e46200c30f1c2"
+      
+    }
+  ]
