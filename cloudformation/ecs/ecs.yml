@@ -7,11 +7,17 @@ Parameters:
     Type: String
   PrefixName:
     Type: String
+  VpcId:
+    Type: String
+  SecurityGroup:
+    Type: String
+  ContainerPort:
+    Type: Number
 Resources:
   Cluster:
     Type: AWS::ECS::Cluster
     Properties:
-      ClusterName: !Join ["-", [!Ref PrefixName, "cluster"]]      
+      ClusterName: !Join ["-", [!Ref PrefixName, "cluster"]]
   LogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
@@ -30,29 +36,29 @@ Resources:
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
   LoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-    Properties: 
+    Properties:
       IpAddressType: ipv4
-      Name: ALB-LoadBalancer                                                        
+      Name: ALB-LoadBalancer-for-demo
       Scheme: internet-facing
       SecurityGroups:
-        - !Ref SecurityGroup                                                        
-      Subnets: 
+        - !Ref SecurityGroup
+      Subnets:
         - !Ref SubnetID
       Type: application
 
   TargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
-      Name: ALB-TargetGroup                                                               
+      Name: ALB-TargetGroup-for-demo
       Port: 80
       Protocol: HTTP
       TargetType: ip
-      VpcId: 	vpc-07d36d2cc7aa09aeb 
+      VpcId: !Ref VpcId
 
   LoadBalancerListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
-      DefaultActions: 
+      DefaultActions:
         - TargetGroupArn: !Ref TargetGroup
           Type: forward
       LoadBalancerArn: !Ref LoadBalancer
@@ -62,17 +68,19 @@ Resources:
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: !Join ["-", [!Ref PrefixName, "task"]]    
+      Family: !Join ["-", [!Ref PrefixName, "task"]]
       Cpu: 256
       Memory: 512
       NetworkMode: awsvpc
       ExecutionRoleArn: !Ref ExecutionRole
       ContainerDefinitions:
-        - Name: !Join ["-", [!Ref PrefixName, "container"]]  
+        - Name: !Join ["-", [!Ref PrefixName, "container"]]
+          #975757560751.dkr.ecr.us-east-1.amazonaws.com/vardaan-repo:demo
           Image: !Join ["", [!Ref AWSAccountId, ".dkr.ecr.",!Ref 'AWS::Region','.amazonaws.com/',!Ref PrefixName, "-","repo"]]
           PortMappings:
-            - ContainerPort: 3000
-  
+            - ContainerPort: !Ref ContainerPort
+              HostPort: !Ref ContainerPort
+
           LogConfiguration:
             LogDriver: awslogs
             Options:
@@ -92,19 +100,19 @@ Resources:
       TaskDefinition: !Ref TaskDefinition
       DesiredCount: 1
       LaunchType: FARGATE
-      NetworkConfiguration: 
+      NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
           Subnets:
             - !Ref SubnetID
           SecurityGroups:
-            - !Ref SecurityGroup                                                        
+            - !Ref SecurityGroup
       LoadBalancers:
         - ContainerName: !Ref PrefixName
           ContainerPort: !Ref ContainerPort
           TargetGroupArn: !Ref TargetGroup
 
-Outputs:        
+Outputs:
     ALB:
         Description: The created loadbalancer
         Value: !Ref LoadBalancer

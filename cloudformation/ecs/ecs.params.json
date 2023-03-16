@@ -8,6 +8,14 @@
       "ParameterValue": "vardaan"
     },
     {
+      "ParameterKey": "VpcId",
+      "ParameterValue": "vpc-07d36d2cc7aa09aeb"
+    },
+    {
+      "ParameterKey": "ContainerPort",
+      "ParameterValue": "3000"
+    },
+    {
       "ParameterKey": "SecurityGroup",
       "ParameterValue": "sg-04842bf54ccd90404"
     },
