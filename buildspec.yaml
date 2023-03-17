@@ -21,5 +21,4 @@ artifacts:
        - imageDefinitions.json
        - cloudformation/ecs/ecs.cloudformation.json
        - cloudformation/ecs/ecs.yml
-       - cloudformation/ecs/ecs.params.json
 
