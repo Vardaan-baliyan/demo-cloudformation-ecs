@@ -1,0 +1,12 @@
+{
+  "Parameters": {
+     "AWSAccountId": "975757560751",
+     "AWSRegion": "us-east-1",
+     "PrefixName": "vardaan",
+     "VpcId": "vpc-07d36d2cc7aa09aeb",
+     "ContainerPort": "3000",
+     "SecurityGroup": "sg-04842bf54ccd90404",
+     "SubnetID2": "subnet-0c897e273a67a2f60",
+     "SubnetID1": "subnet-00c9e46200c30f1c2",
+     }
+}
