@@ -1,0 +1,3 @@
+cloudformation/ecs/ecs.params.json
+cloudformation/ecr/ecr.params.json
+cloudformation/pipeline/pipeline.params.json

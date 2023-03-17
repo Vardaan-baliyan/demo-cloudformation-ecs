@@ -83,7 +83,7 @@ Resources:
         Type: LINUX_CONTAINER
         EnvironmentVariables:
           - Name: ECR_URI
-            Value: !Join ["", [!Ref AWSAccountId, ".dkr.ecr.",!Ref AWSRegion,".amazonaws.com/",!Ref PrefixName, "-","repo",":latest"]]
+            Value: !Join ["", [!Ref AWSAccountId, ".dkr.ecr.",!Ref AWSRegion,".amazonaws.com/",!Ref PrefixName, "-","repo"]]
           - Name: IMAGE_TAG
             Value: latest
           - Name: AWS_REGION
