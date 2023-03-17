@@ -3,7 +3,9 @@ Parameters:
   AWSAccountId:
     Type: String
     Description: AWS Account ID
-  SubnetID:
+  SubnetID1:
+    Type: String
+  SubnetID2:
     Type: String
   PrefixName:
     Type: String
@@ -13,6 +15,8 @@ Parameters:
     Type: String
   ContainerPort:
     Type: Number
+  AWSRegion:
+    Type: String
 Resources:
   Cluster:
     Type: AWS::ECS::Cluster
@@ -43,7 +47,8 @@ Resources:
       SecurityGroups:
         - !Ref SecurityGroup
       Subnets:
-        - !Ref SubnetID
+        - subnet-00c9e46200c30f1c2
+        - subnet-0c897e273a67a2f60
       Type: application
 
   TargetGroup:
@@ -54,6 +59,13 @@ Resources:
       Protocol: HTTP
       TargetType: ip
       VpcId: !Ref VpcId
+      HealthCheckProtocol: HTTP     
+      HealthCheckPath: /
+      HealthCheckPort: 3000
+      HealthCheckIntervalSeconds: 30
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 5
+      UnhealthyThresholdCount: 2
 
   LoadBalancerListener:
     Type: AWS::ElasticLoadBalancingV2::Listener
@@ -75,8 +87,7 @@ Resources:
       ExecutionRoleArn: !Ref ExecutionRole
       ContainerDefinitions:
         - Name: !Join ["-", [!Ref PrefixName, "container"]]
-          #975757560751.dkr.ecr.us-east-1.amazonaws.com/vardaan-repo:demo
-          Image: !Join ["", [!Ref AWSAccountId, ".dkr.ecr.",!Ref 'AWS::Region','.amazonaws.com/',!Ref PrefixName, "-","repo"]]
+          Image: !Join ["", [!Ref AWSAccountId, ".dkr.ecr.",!Ref AWSRegion,".amazonaws.com/",!Ref PrefixName, "-","repo",":latest"]]
           PortMappings:
             - ContainerPort: !Ref ContainerPort
               HostPort: !Ref ContainerPort
@@ -104,15 +115,21 @@ Resources:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
           Subnets:
-            - !Ref SubnetID
+            - !Ref SubnetID1
           SecurityGroups:
             - !Ref SecurityGroup
       LoadBalancers:
-        - ContainerName: !Ref PrefixName
+        - ContainerName: !Join ["-", [!Ref PrefixName, "container"]]
           ContainerPort: !Ref ContainerPort
           TargetGroupArn: !Ref TargetGroup
 
 Outputs:
-    ALB:
+    LoadBalancer:
         Description: The created loadbalancer
         Value: !Ref LoadBalancer
+
+    LoadBalancerDNS:
+        Description: The DNSName of the backup load balancer
+        Value: !GetAtt LoadBalancer.DNSName
+      
+  

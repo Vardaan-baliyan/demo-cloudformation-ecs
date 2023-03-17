@@ -4,6 +4,10 @@
     "ParameterValue": "975757560751"
   },  
   {
+    "ParameterKey": "AWSRegion",
+    "ParameterValue": "us-east-1"
+  },
+  {
       "ParameterKey": "PrefixName",
       "ParameterValue": "vardaan"
     },
@@ -20,7 +24,11 @@
       "ParameterValue": "sg-04842bf54ccd90404"
     },
     {
-      "ParameterKey": "SubnetID",
+      "ParameterKey": "SubnetID2",
+      "ParameterValue": "subnet-0c897e273a67a2f60"
+    },
+    {
+      "ParameterKey": "SubnetID1",
       "ParameterValue": "subnet-00c9e46200c30f1c2"
       
     }

@@ -13,6 +13,6 @@
     },
     {
       "ParameterKey": "AWSECRRepoName",
-      "ParameterValue": "Vardaan-repo-demo"
+      "ParameterValue": "Vardaan-repo"
     }
   ]
