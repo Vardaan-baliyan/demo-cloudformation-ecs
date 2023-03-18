@@ -157,7 +157,7 @@ Resources:
             InputArtifacts:
               - Name: build-output-artifacts
             Configuration:
-                ClusterName: vardaan-cluster                                    # Provide Cluster Name
-                ServiceName: vardaan-service                                 # Provide Service Name
-                FileName: imageDefinitions.json                         # Provide File Name as per deployment name
+                ClusterName: vardaan-cluster                     # Provide Cluster Name
+                ServiceName: vardaan-service                     # Provide Service Name
+                FileName: imageDefinitions.json                  # Provide File Name as per deployment name
             RunOrder: 1
