@@ -1,2 +1,2 @@
-ecs.params.json
-ecs.cloudformation.json
+*.json
+
