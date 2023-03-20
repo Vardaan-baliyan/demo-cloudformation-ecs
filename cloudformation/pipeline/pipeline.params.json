@@ -1,0 +1,42 @@
+[
+    {
+      "ParameterKey": "Stage",
+      "ParameterValue": "dev"
+    },  
+    {
+      "ParameterKey": "GithubUserName",
+      "ParameterValue": "vardaan-baliyan"
+    },
+    {
+        "ParameterKey": "PrefixName",
+        "ParameterValue": "vardaan"
+      },
+    {
+        "ParameterKey": "AWSRegion",
+        "ParameterValue": "us-east-1"
+      },
+    {
+        "ParameterKey": "GithubRepo",
+        "ParameterValue": "demo-cloudformation-ecs"
+    },
+    {
+        "ParameterKey": "GithubBranch",
+        "ParameterValue": "master"
+    },
+    {
+        "ParameterKey": "GithubOAuthToken",
+        "ParameterValue": "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"
+    },
+    {
+        "ParameterKey": "ContainerPort",
+        "ParameterValue": "3000"
+    },
+    {
+        "ParameterKey": "AWSAccountId",
+        "ParameterValue": "975757560751"
+    },
+    {
+        "ParameterKey": "Bucket",
+        "ParameterValue": "vardaan-0989123"
+    }
+]
